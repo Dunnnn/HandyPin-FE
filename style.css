@@ -1,0 +1,458 @@
+.angular-google-map-container {
+    height:100vh;
+}
+
+/*--------------------------Control Buttons------------------------------*/
+.sqrBtnBG{
+  background-color: #fff;
+  border: none;
+  outline:  none;
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 0px;
+}
+
+.rdBtnBG{
+  background-color: #fff;
+  border: solid 2px rgba(0, 0, 0, .5);
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 0px;
+}
+
+.yourLocationImg{
+  margin: 5px;
+/*  width: 24px;*/
+  height: 24px;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+}
+
+.postImg{
+  width : 24px ;
+  height : 24px ;
+  background-image :  url(res/ic_add_black_24dp_1x.png) ;
+  background-size :  24px 24px ;
+  background-position :  0px 0px ;
+  opacity: 0.6;
+  background-repeat :  no-repeat ;
+}
+
+.rdBtnBG:active {
+  background-color:#AAA;
+}
+
+/* -------------------------Side navigator----------------------------*/
+.sidenav {
+  height: 100%;
+  width: 500px;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgb(234, 106, 108);
+  font-family: Courier New;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 0px;
+  word-wrap: break-word;
+}
+
+.sidenav p {
+  padding: 8px 8px 10px 12px;
+  text-decoration: none;
+  font-size: 48px;
+  color: #fff;
+  display: block;
+  border-bottom: 3px solid #fff;
+  margin-bottom:10px;
+}
+
+.sidenav a {
+  padding: 24px 8px 8px 52px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #fff;
+  display: block;
+  transition: 0.3s
+}
+
+
+.sidenav a:hover, .offcanvas a:focus{
+  color: #87d9ce;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.myform{
+  padding: 24px 8px 8px 52px;
+}
+
+@media screen and (max-height: 600px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+/* -------------------------Input Text ----------------------------*/
+
+
+.sidenav input[type="text"] {
+  padding: 10px;
+  border: solid 5px rgba(255,255,255, 0.9);
+  transition: border 0.3s;
+}
+.sidenav input[type="text"]:focus,
+.sidenav input[type="text"].focus {
+  border: solid 5px #969696;
+}
+
+.sidenav textarea{
+  padding: 10px;
+  border: solid 5px rgba(255,255,255, 0.9);
+  transition: border 0.3s;
+}
+.sidenav textarea:focus,
+.sidenav textarea.focus {
+  border: solid 5px #969696;
+}
+
+.nav-form {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-form input{
+  padding: 10px;
+  margin: -10px;
+  background-color: rgba(255,255,255, 0.9);
+  font-size: 22px;
+  font-family: "Courier New";
+  flex: 1;
+}
+
+.nav-form textarea{
+  background-color: rgba(255,255,255, 0.9);
+  font-size: 24px;
+  padding: 10px;
+  margin: -10px;
+  font-family: "Courier New";
+  flex: 1;
+}
+
+.nav-form label {
+  margin: 0px 0px 0px -10px;
+  font-size: 25px;
+  color: #fff;
+  display: block;
+  flex: 1;
+}
+.comment-topic-form {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: normal;
+  display: block;
+
+}
+#comment-topic-title {
+border-style: :none;
+
+}
+#comment-section{
+  white-space: normal;
+}
+
+#comment-topic-body {
+  font-family: Courier New;
+  margin: 0px 0px 0px 10px;
+  font-size: 25px;
+  color: #fff;
+  display: block;
+  flex: 1;
+}
+#comment-topic-user {
+  font-family: Courier New;
+  margin: 0px 0px 0px 10px;
+  font-size: 25px;
+  color: #60cabb;
+  /*display: block;*/
+  flex: 1;
+}
+#comments-form form{
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: block;
+  word-wrap: break-word;
+}
+
+.comment-user-body {
+  margin: 5px;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  display: inline;
+  word-wrap: break-word;
+  white-space: normal;
+}
+.comment-body {
+  font-family: Courier New;
+  margin: 0px 0px 0px 0px;
+  font-size: 20px;
+  color: #fff;
+  /*display: block;*/
+  white-space: normal;
+  word-wrap: break-word;
+  flex: 1;
+  white-space: normal;
+}
+.comment-user {
+  font-family: Courier New;
+  margin: 0px 0px 0px 10px;
+  font-size: 20px;
+  color: #60cabb;
+  /*display: block;*/
+  flex: 1;
+  white-space: normal;
+}
+.comment-time{
+  font-family: Courier New;
+  margin: 0px 0px 0px 0px;
+  font-size: 10px;
+  color: #fff;
+  opacity: 0.5;
+  /*display: block;*/
+  word-wrap: break-word;
+  text-align: right;
+  flex: 1;
+}
+
+.tag{
+  font-family: Courier New;
+  margin: 5px 10px 10px 5px;
+/*  margin: 30px;
+*/  color: #fff;
+  flex: 1;
+}
+.tag label{
+  /*padding: 8px 24px 10px 12px;*/
+  padding: 0px 4px 0px 4px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #60cabb;
+  display: inline;
+  border-radius: 25px;
+  /*background-color: #60cabb;*/
+  border: solid #60cabb 2px;
+}
+.tag p{
+  padding: 8px 8px 10px 12px;
+  text-decoration: none;
+  font-size: 48px;
+  color: #fff;
+  display: block;
+  border-style: none;
+}
+#tags-divider {
+    border-top: 3px solid #fff;
+     opacity: 1;
+}
+
+hr{
+ border-top: 3px solid #fff;
+ opacity: .4;
+}
+
+.nav-form button {
+  margin: 20px -10px 0px -10px;
+  font-size: 32px;
+  height: 2em;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Courier New;
+  color: #ffffff;
+  background: #60cabb;
+  padding: 10px 20px 10px 20px;
+  display: block;
+  text-decoration: none;
+  border: solid #60cabb 2px;
+  flex: 1;
+
+}
+
+.nav-form button:hover {
+  background: #077767;
+  border: solid #11ccb1 2px;
+  font-size: 36px;
+  font-weight: bold;
+  text-decoration: none;
+}
+#tag-input-field {
+
+}
+/* -------------------------Info Window----------------------------*/
+.gm-style-iw {
+  /*background-color: rgb(234, 106, 108);*/
+  width: 300px;
+  /* color: #fff;*/
+}
+.InfoWindowContent{
+    margin: 0.3em 0.3em 0.1em 0.3em;
+    height: 6.6em;
+}
+.InfoWindowContent div {
+  height : 100%;
+  float: left;
+  clear: none;
+  /*color: #fff;
+  background-color: rgb(234, 106, 108);*/
+  font-family: Courier New;
+
+}
+.InfoWindowContent form {
+  float: left;
+  clear: none;
+ /* color: #fff;
+ background-color: rgb(234, 106, 108);*/
+ font-family: Courier New;
+ /*display: block;*/
+}
+
+
+.InfoWindowContent .vote-control button{
+  background-color: rgb(234, 106, 108);
+  margin: 0px 10px 0px 10px;
+  font-size:16px;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Courier New;
+  color: #ffffff;
+  background: #60cabb;
+  padding: 5px 10px 5px 10px;
+  display: block;
+  text-decoration: none;
+  border: solid #60cabb 2px;
+  flex: 1;
+}
+.InfoWindowContentButton {
+  background-color: rgb(234, 106, 108);
+  margin: 1.7em 0px 0px 0px;
+  font-size:16px;
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Courier New;
+  color: #ffffff;
+  background: #60cabb;
+  padding: 5px 10px 5px 10px;
+  display: block;
+  text-decoration: none;
+  border: solid #60cabb 2px;
+  flex: 1;
+}
+.InfoWindowContentButton:hover {
+  color: #60cabb;
+  background: #ffffff;
+}
+
+.InfoWindowContent .post-title{
+    white-space: nowrap;
+    overflow: hidden;
+    width: 8em;
+    margin: 0px 10px 0px 10px;
+}
+
+.InfoWindowContent .post-title .moving:hover{
+    animation: slide infinite 7s;
+}
+
+.InfoWindowContent .post-title p{
+    margin-top: 2em;
+    line-height: 140%;
+    font-size: 16px;
+}
+
+.heart{
+  color: rgb(234, 106, 108);
+  margin-left: 5px;
+}
+
+/*----------------------------pac-input-------------------------*/
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+#target {
+  width: 345px;
+}
+
+@keyframes slide {
+    from {margin-left: 0%;}
+    to {margin-left: -100%;}
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  background: rgb(234, 106, 108);
+  color: #fff;
+}
+
+.navbar-text {
+	float: none;
+}

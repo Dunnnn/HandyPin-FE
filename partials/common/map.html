@@ -1,0 +1,28 @@
+<div>
+    <ui-gmap-google-map center='map.center' zoom='map.zoom' options='map.options' events='map.events' bounds='map.bounds'>
+    	<ui-gmap-map-control template="{{searchbox.template}}" position="TOP_LEFT" controller="searchBoxCtrl"></ui-gmap-map-control>
+    	<ui-gmap-map-control template="{{menuButton.template}}" position="RIGHT_BOTTOM" controller="menuButtonCtrl"></ui-gmap-map-control>
+    	<ui-gmap-marker coords="pin.geo" idKey="pin.id" ng-repeat="pin in pins">
+    		<ui-gmap-window isIconVisibleOnClick="true">
+	    		<div class="InfoWindowContent" ng-controller="infoWindowCtrl">
+	    			<div style="margin-bottom: 0.3em">          
+	    				<form class="vote-control">            
+	    					<button type="button" ng-click="upVote()">▲</button>            
+	    					<strong class="heart">♡: {{pin.vote_score}}</strong>            
+	    					<button type="button" ng-click="downVote()" )>▼</button>          
+	    				</form>      
+	    			</div>      
+	    			<div class="post-title" ng-show="{{pin.title.length}} > 11">        
+	    				<p class="moving"><strong>{{pin.title}}</strong></p>      
+	    			</div>
+	    			<div class="post-title" ng-show="{{pin.title.length}} <= 11">        
+	    				<p><strong>{{pin.title}}</strong></p>      
+	    			</div>
+	    			<div>
+	    				<button class="InfoWindowContentButton" type="button" ng-click="showDetailOnclick()">View</button>
+	    			</div>
+	    		</div>
+    		</ui-gmap-window>
+    	</ui-gmap-marker>
+    </ui-gmap-google-map>
+</div>

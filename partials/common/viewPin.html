@@ -1,0 +1,39 @@
+<div class="tag" id="comment-tags-form">
+	<p id="comment-topic-title">
+		<strong>{{pin.title}}</strong>
+	</p>
+</div>
+<hr id="tags-divider">
+<div class="comment-topic-form">
+	<label id="comment-topic-user" ng-show="{{pin.owner.id}} > 0">{{pin.owner.username}}: </label>
+	<label id="comment-topic-user" ng-show="{{pin.owner.id}} <= 0">Guest: </label>
+</div>
+<div class="comment-topic-form">
+	<label id="comment-topic-body" ng-show="pin.description">{{pin.description}}</label>
+	<label id="comment-topic-body" ng-show="!pin.description">{{pin.title}}</label>
+	<div class="comment-time">
+		<label class="comment-time" id="post-time-comment-section">{{pin.created_at}}</label>
+	</div>
+</div>
+<form id="comments-form">
+	<br>
+	<hr>
+	<br>
+	<div ng-repeat="comment in pin.comments">
+		<div class="comment-user-body">
+			<label class="comment-user" ng-show="{{comment.owner.id}} > 0">{{comment.owner.username}}: </label>
+			<label class="comment-user" ng-show="{{comment.owner.id}} <= 0">Guest: </label>
+			<label class="comment-body">{{comment.content}}</label>
+			<div class="comment-time">
+				<label class="comment-time">{{comment.created_at}}</label>
+			</div>
+		</div>
+	</div>
+	<div class="nav-form">
+		<textarea class="tag-input-fied" rows="5" placeholder="(Share your comment with us!)" id="comment-input" ng-model="new_comment">
+		</textarea>
+	</div>
+	<div class="nav-form">
+		<button id="add-comment-btn" type="button" ng-click="submitCommentRequest()">Add Comment</button>
+	</div>
+</form>

@@ -1,0 +1,25 @@
+<p class="navbar-text">
+	<strong>New Post</strong>
+</p>
+<form class="nav-form">
+	<label>☰ Title</label>
+</form>
+<form class="nav-form">
+	<input id="make-title-id" type="text" placeholder="Title" ng-model="title" class="border-text-input">
+</form>
+<form class="nav-form">
+	<label>☰ Body</label>
+</form>
+<form class="nav-form">
+	<textarea id="make-body-id" rows="8" placeholder="(Optional)" ng-model="description"></textarea>
+</form>
+<form class="nav-form">
+	<label>☰ Tags</label>
+</form>
+<form class="nav-form">
+	<textarea id="make-tag-id" class="tag-input-field" ng-model="tag_string" placeholder="(Optional)" rows="2">
+	</textarea>
+</form>
+<form class="nav-form">
+	<button id="post-btn-id" type="button" ng-click="submitPostPinRequest()">Post</button>
+</form>
