@@ -22,7 +22,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/unauth',
 	 	views: {
 	        'map@' : {
-	        	templateUrl: '/partials/common/map.html',
+	        	templateUrl: 'partials/common/map.html',
 	         	controller: 'mainController'
 	      	}
 	    },
@@ -36,7 +36,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/home',
 	 	views: {
 	        'sidenav@' : {
-	        	templateUrl: '/partials/unauth/homeSideNav.html',
+	        	templateUrl: 'partials/unauth/homeSideNav.html',
 	         	controller: 'unauthHomeSideNavCtrl'
 	      	}
 	    },
@@ -46,7 +46,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/login',
 	 	views: {
 	        'sidenav@' : {
-	        	templateUrl: '/partials/unauth/login.html',
+	        	templateUrl: 'partials/unauth/login.html',
 	         	controller: 'loginCtrl'
 	      	}
 	    },
@@ -57,7 +57,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/auth',
 	 	views: {
 	        'map@' : {
-	        	templateUrl: '/partials/common/map.html',
+	        	templateUrl: 'partials/common/map.html',
 	         	controller: 'mainController'
 	      	}
 	    },
@@ -71,7 +71,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/home',
 	 	views: {
 	        'sidenav@' : {
-	        	templateUrl: '/partials/auth/homeSideNav.html',
+	        	templateUrl: 'partials/auth/homeSideNav.html',
 	         	controller: 'authHomeSideNavCtrl'
 	      	}
 	    },
@@ -81,7 +81,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/newPin',
 	 	views: {
 	        'sidenav@' : {
-	        	templateUrl: '/partials/common/newPin.html',
+	        	templateUrl: 'partials/common/newPin.html',
 	         	controller: 'newPinCtrl'
 	      	}
 	    },
@@ -91,7 +91,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/newPin',
 	 	views: {
 	        'sidenav@' : {
-	        	templateUrl: '/partials/common/newPin.html',
+	        	templateUrl: 'partials/common/newPin.html',
 	         	controller: 'newPinCtrl'
 	      	}
 	    },
@@ -101,7 +101,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/viewPin?pin_id',
 	 	views: {
 	        'sidenav@' : {
-	        	templateUrl: '/partials/common/viewPin.html',
+	        	templateUrl: 'partials/common/viewPin.html',
 	         	controller: 'viewPinCtrl'
 	      	}
 	    },
@@ -116,7 +116,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	 	url: '/viewPin?pin_id',
 	 	views: {
 	        'sidenav@' : {
-	        	templateUrl: '/partials/common/viewPin.html',
+	        	templateUrl: 'partials/common/viewPin.html',
 	         	controller: 'viewPinCtrl'
 	      	}
 	    },
@@ -128,7 +128,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    }
 	 })
 
-	 $urlRouterProvider.otherwise('/unauth/home');
+	 $urlRouterProvider.otherwise('unauth/home');
 })
 
 app.run(function($rootScope, $state) {
