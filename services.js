@@ -234,14 +234,14 @@ app.factory('APIHelper', function($q, $http, $timeout, AuthService) {
     function determineIcon(pin) {
         if(AuthService.getUser()) {
             if(AuthService.getUser().id == pin.owner.id) {
-                return "/res/red-pin.png"
+                return "res/red-pin.png"
             } else {
-                return "/res/blue-pin.png"
+                return "res/blue-pin.png"
             }
 
         }
         else {
-            return "/res/blue-pin.png"
+            return "res/blue-pin.png"
         }
     }
 

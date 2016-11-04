@@ -13,7 +13,7 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
 			},
 			options : {
 				icon : {
-					url: "/res/subway-maps-australia-16-l-124x124.png",
+					url: "res/subway-maps-australia-16-l-124x124.png",
 					scaledSize: new maps.Size(60, 60)
 				},
 				animation : maps.Animation.DROP,
