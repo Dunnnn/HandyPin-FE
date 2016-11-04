@@ -1,6 +1,13 @@
-<p class="navbar-text">
-	<strong>Handy Pin</strong>
+<div style="width: 200px; margin-left: 150px">
+	<div class="squareImgContainer" >
+	<img style="width:80%; height: 80%; padding: 4px" ng-src="{{user.profile_photo.download_url || 'res/User-red-icon.png'}}" class="img-circle squareImg img-thumbnail"  alt="loading image..." id="homeProfilePic">
+	</div>
+</div>
+<p class="navbar-text" style="text-align: center; border-bottom: none; margin: 0px; padding: 0px; line-height: initial">
+	<strong>{{user.username}}</strong>
 </p>
-<a>Hello {{user.username}}</a>
+<p class="navbar-text" style="text-align: center; font-size: 24px; margin-top: 0px; padding-top: 0px">
+	{{user.email}}
+</p>
 <a id="make-post" ui-sref="auth.newPin">New post</a>
 <a ng-click="submitSignoutRequest()">Sign Out</a>
