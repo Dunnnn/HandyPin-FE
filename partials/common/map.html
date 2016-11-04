@@ -1,8 +1,11 @@
 <div>
     <ui-gmap-google-map center='map.center' zoom='map.zoom' options='map.options' events='map.events' bounds='map.bounds'>
     	<ui-gmap-map-control template="{{searchbox.template}}" position="TOP_LEFT" controller="searchBoxCtrl"></ui-gmap-map-control>
+    	<ui-gmap-map-control template="{{recenterButton.template}}" position="RIGHT_BOTTOM" controller="recenterButtonCtrl"></ui-gmap-map-control>
     	<ui-gmap-map-control template="{{menuButton.template}}" position="RIGHT_BOTTOM" controller="menuButtonCtrl"></ui-gmap-map-control>
-    	<ui-gmap-marker coords="pin.geo" idKey="pin.id" ng-repeat="pin in pins">
+    	<ui-gmap-marker coords="selfMarker.position" idKey="-1" options="selfMarker.options">
+    	</ui-gmap-marker>
+    	<ui-gmap-marker coords="pin.geo" idKey="pin.id" options="pin.options" ng-repeat="pin in pins">
     		<ui-gmap-window isIconVisibleOnClick="true">
 	    		<div class="InfoWindowContent" ng-controller="infoWindowCtrl">
 	    			<div style="margin-bottom: 0.3em">          

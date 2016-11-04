@@ -1,15 +1,33 @@
 var app = angular.module('HandyPinApp');
 
 /*Map part*/
-app.controller('mainController', function($scope, currentPosition, APIHelper, $compile) {
+app.controller('mainController', function($scope, currentPosition, APIHelper, $compile, $state, uiGmapGoogleMapApi) {
 	$scope.currentPosition = currentPosition;
 	$scope.pins = []
+
+	uiGmapGoogleMapApi.then(function(maps) {
+		$scope.selfMarker = {
+			position : {
+				latitude: currentPosition.coords.latitude,
+	    		longitude: currentPosition.coords.longitude
+			},
+			options : {
+				icon : {
+					url: "/res/subway-maps-australia-16-l-124x124.png",
+					scaledSize: new maps.Size(60, 60)
+				},
+				animation : maps.Animation.DROP,
+				clickable: false
+			}
+		}
+	})
+
     $scope.map = { 
     	center: { 
     		latitude: currentPosition.coords.latitude,
     		longitude: currentPosition.coords.longitude
     	},
-    	zoom: 15,
+    	zoom: 16,
     	options : {
 		    styles : [
 						    {
@@ -75,6 +93,10 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
     	template : 'partials/common/menuButton.html'
     }
 
+    $scope.recenterButton = {
+    	template : 'partials/common/recenterButton.html'
+    }
+
     $scope.$on('keywordChanged', function(event, args) { 
     	$scope.keyword = args
     	APIHelper
@@ -94,8 +116,17 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
 
 	$scope.$on('newPinCreated', function(event, args) {
 		$scope.pins.push(args)
+		$state.go('^.home')
 	})
 
+	$scope.$on('recenter', function(event, args) {
+		$scope.map.center = { 
+			latitude: currentPosition.coords.latitude,
+    		longitude: currentPosition.coords.longitude
+    	}
+
+    	$scope.map.zoom = 16 
+	})
 })
 
 app.controller('searchBoxCtrl', function($rootScope, $scope, APIHelper, uiGmapGoogleMapApi) {
@@ -111,15 +142,21 @@ app.controller('menuButtonCtrl', function($rootScope, $scope, $state) {
     }
 })
 
+app.controller('recenterButtonCtrl', function($rootScope, $scope, $state) {
+    $scope.recenter = function() {
+    	$rootScope.$broadcast('recenter');
+    }
+})
+
 /*Sidebar part*/
-app.controller('authHomeSideNavCtrl', function($scope, $state, AuthService) {
+app.controller('authHomeSideNavCtrl', function($scope, $rootScope, $state, AuthService, alertHelper) {
 	$scope.user = AuthService.getUser()
 
 	$scope.submitSignoutRequest = function() {
 		AuthService
 			.logout()
 			.then(function() {
-				alert('You have successfully signed out')
+				alertHelper.alertMsg('You have successfully signed out')
 				$state.go('unauth.home')
 			})
 	}
@@ -128,7 +165,7 @@ app.controller('authHomeSideNavCtrl', function($scope, $state, AuthService) {
 app.controller('unauthHomeSideNavCtrl', function($scope, $state) {
 })
 
-app.controller('loginCtrl', function($scope, $state, $rootScope, AuthService) {
+app.controller('loginCtrl', function($scope, $state, $rootScope, AuthService, alertHelper) {
 	$scope.submitLoginRequest = function() {
 		AuthService
 			.login($scope.username, $scope.password)
@@ -140,12 +177,12 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, AuthService) {
 			.catch(function() {
 				$scope.username = ''
 				$scope.password = ''
-				console.log('error')
+				alertHelper.alertMsg('Invalid username password combination')
 			})
 	}
 })
 
-app.controller('newPinCtrl', function($scope, $rootScope, $state, APIHelper, geolocationSvc, AuthService) {
+app.controller('newPinCtrl', function($scope, $rootScope, $state, APIHelper, geolocationSvc, AuthService, uiGmapGoogleMapApi) {
 	$scope.user = AuthService.getUser()
 
 	$scope.submitPostPinRequest = function () {
@@ -165,9 +202,11 @@ app.controller('newPinCtrl', function($scope, $rootScope, $state, APIHelper, geo
 				latitude: currentPosition.coords.latitude,
 				tag_strings: tag_string_array? tag_string_array:null
 			}).then(function(pin){
-				$rootScope.$broadcast('newPinCreated', pin)
-				$rootScope.isCollapsedHorizontal = true
-				$state.go('^.home')
+				uiGmapGoogleMapApi.then(function(maps){
+					pin.options.animation = maps.Animation.DROP
+					$rootScope.$broadcast('newPinCreated', pin)
+					$rootScope.isCollapsedHorizontal = true
+				})
 			}).catch(function(error){
 				console.log("Error posting pin: " + error)
 			})

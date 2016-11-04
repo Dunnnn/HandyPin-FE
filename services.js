@@ -147,7 +147,7 @@ app.factory('AuthService',
 
 });
 
-app.factory('APIHelper', function($q, $http, AuthService) {
+app.factory('APIHelper', function($q, $http, $timeout, AuthService) {
     var factory = {}
 
     factory.searchPins = searchPins
@@ -164,7 +164,9 @@ app.factory('APIHelper', function($q, $http, AuthService) {
             params: params,
             withCredentials: true
         }).then(function(data, status){
-            return data.data
+            return addPinsOption(data.data).then(function(){
+                return data.data
+            })
         })
     }
 
@@ -185,7 +187,9 @@ app.factory('APIHelper', function($q, $http, AuthService) {
             url : 'https://ec2-54-208-245-21.compute-1.amazonaws.com/api/pins',
             params: params
         }).then(function(data, status){
-            return data.data
+            return addPinsOption(data.data).then(function(){
+                return data.data
+            })
         })
     }
 
@@ -197,6 +201,71 @@ app.factory('APIHelper', function($q, $http, AuthService) {
         }).then(function(data, status){
             return data.data
         })
+    }
+
+    /*Private Helper functions*/
+    function addPinsOption(pins) {
+        promises = []
+
+        if(Array.isArray(pins)) {
+            for(var i = 0; i < pins.length; i++) {
+                promises.push(addPinOption(pins[i]))
+            }
+        } else {
+            promises.push(addPinOption(pins))
+        }
+
+
+        return $q.all(promises)
+    }
+
+    function addPinOption(pin) {
+        var d = $q.defer();
+        $timeout(function(){
+            pin.options = {
+                icon : determineIcon(pin)
+            }
+            d.resolve()
+        }, 1000, false);    
+
+        return d.promise;
+    }
+
+    function determineIcon(pin) {
+        if(AuthService.getUser()) {
+            if(AuthService.getUser().id == pin.owner.id) {
+                return "/res/red-pin.png"
+            } else {
+                return "/res/blue-pin.png"
+            }
+
+        }
+        else {
+            return "/res/blue-pin.png"
+        }
+    }
+
+    return factory
+})
+
+app.factory('alertHelper', function($uibModal){
+    factory = {}
+
+    factory.alertMsg = alertMsg
+
+    function alertMsg(msg) {
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'partials/common/alertModal.html',
+            controller: function($scope, $uibModalInstance){
+                $scope.msg = msg
+                $scope.ok = function () {
+                    $uibModalInstance.close();
+                };
+            },
+            size: 'sm'
+        });
     }
 
     return factory
