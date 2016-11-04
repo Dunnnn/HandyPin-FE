@@ -10,9 +10,13 @@
 	    		<div class="InfoWindowContent" ng-controller="infoWindowCtrl">
 	    			<div style="margin-bottom: 0.3em">          
 	    				<form class="vote-control">            
-	    					<button type="button" ng-click="upVote()">▲</button>            
+	    					<button type="button" ng-click="upVote()" ng-show="{{!pin.vote_by_current_user}}">▲</button> 
+	    					<button type="button" class="disabled disabled-highlight" ng-show="{{pin.vote_by_current_user||false}} && {{pin.vote_by_current_user.vote||false}}">▲</button> 
+	    					<button type="button" class="disabled" ng-show="{{pin.vote_by_current_user||false}} && {{(!pin.vote_by_current_user.vote)||false}}">▲</button>      
 	    					<strong class="heart">♡: {{pin.vote_score}}</strong>            
-	    					<button type="button" ng-click="downVote()" )>▼</button>          
+	    					<button type="button" ng-click="downVote()" ng-show="{{!pin.vote_by_current_user}}">▼</button>
+	    					<button type="button" class="disabled disabled-highlight" ng-show="{{pin.vote_by_current_user||false}} && {{(!pin.vote_by_current_user.vote)||false}}">▼</button>   
+	    					<button type="button" class="disabled" ng-show="{{pin.vote_by_current_user||false}} && {{pin.vote_by_current_user.vote||false}}">▼</button>        
 	    				</form>      
 	    			</div>      
 	    			<div class="post-title" ng-show="{{pin.title.length}} > 11">        

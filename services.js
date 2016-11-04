@@ -153,6 +153,7 @@ app.factory('APIHelper', function($q, $http, $timeout, AuthService) {
     factory.searchPins = searchPins
     factory.getPin = getPin
     factory.postPin = postPin
+    factory.votePin = votePin
     factory.postComment = postComment
 
     function searchPins(params) {
@@ -190,6 +191,16 @@ app.factory('APIHelper', function($q, $http, $timeout, AuthService) {
             return addPinsOption(data.data).then(function(){
                 return data.data
             })
+        })
+    }
+
+    function votePin(params) {
+        return $http({
+            method: 'POST',
+            url : 'https://ec2-54-208-245-21.compute-1.amazonaws.com/api/votes',
+            params: params
+        }).then(function(data, status){
+            return data.data
         })
     }
 

@@ -115,8 +115,25 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
     })
 
 	$scope.$on('newPinCreated', function(event, args) {
+		$scope.map.center = { 
+			latitude: currentPosition.coords.latitude,
+    		longitude: currentPosition.coords.longitude
+    	}
+
+    	$scope.map.zoom = 16 
 		$scope.pins.push(args)
 		$state.go('^.home')
+	})
+
+	$scope.$on('newVote', function(event, args) {
+		vote = args.vote
+		pin_id = args.pin_id
+		$scope.pins.forEach(function(pin) {
+			if(pin.id == pin_id) {
+				pin.vote_by_current_user = vote
+				pin.vote_score += vote.vote? 1:-1
+			}
+		})
 	})
 
 	$scope.$on('recenter', function(event, args) {
@@ -172,8 +189,6 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, AuthService, al
 			AuthService
 				.login($scope.username, $scope.password)
 				.then(function() {
-					$scope.username = ''
-					$scope.password = ''
 					$state.go('auth.home')
 				})
 				.catch(function() {
@@ -247,7 +262,9 @@ app.controller('viewPinCtrl', function($rootScope, $scope, $state, pin, APIHelpe
 	}
 })
 
-app.controller('infoWindowCtrl', function($scope, $state) {
+app.controller('infoWindowCtrl', function($scope, $rootScope, $state, AuthService, APIHelper, alertHelper) {
+	$scope.user = AuthService.getUser()
+
 	$scope.showDetailOnclick = function() {
 		//hacky method to get pin id
     	$state.go(
@@ -261,10 +278,54 @@ app.controller('infoWindowCtrl', function($scope, $state) {
 	$scope.downVote = function() {
 		//hacky method to get pin id
 		pin_id = $scope.$parent.idKey
+
+		if($scope.user) {
+			APIHelper.votePin({
+				user_id : $scope.user.id,
+				pin_id: pin_id,
+				vote : 0
+			}).then(function(vote){
+				$rootScope.$broadcast(
+					'newVote',
+					{
+						vote: vote,
+						pin_id: pin_id
+					}
+				)
+			}).catch(function(error) {
+				alertHelper.alertMsg(error)
+			})
+		} else {
+			alertHelper.alertMsg('User needs to login to vote')
+			$state.go('unauth.login')
+			$rootScope.isCollapsedHorizontal = false
+		}
 	}
 
 	$scope.upVote = function() {
 		//hacky method to get pin id
 		pin_id = $scope.$parent.idKey
+
+		if($scope.user) {
+			APIHelper.votePin({
+				user_id : $scope.user.id,
+				pin_id: pin_id,
+				vote : 1
+			}).then(function(vote){
+				$rootScope.$broadcast(
+					'newVote',
+					{
+						vote: vote,
+						pin_id: pin_id
+					}
+				)
+			}).catch(function(error){
+				alertHelper.alertMsg(error)
+			})
+		} else {
+			alertHelper.alertMsg('User needs to login to vote')
+			$state.go('unauth.login')
+			$rootScope.isCollapsedHorizontal = false
+		}
 	}
 })

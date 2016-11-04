@@ -355,6 +355,19 @@ hr{
   border: solid #60cabb 2px;
   flex: 1;
 }
+
+.InfoWindowContent .vote-control button.disabled {
+	cursor: not-allowed;
+	box-shadow: none;
+	opacity: 0.65;
+}
+
+.InfoWindowContent .vote-control button.disabled-highlight {
+	cursor: not-allowed;
+	color: rgb(234, 106, 108);
+	opacity: 0.65;
+}
+
 .InfoWindowContentButton {
   background-color: rgb(234, 106, 108);
   margin: 1.7em 0px 0px 0px;

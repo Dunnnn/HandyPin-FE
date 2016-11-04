@@ -2,6 +2,7 @@
 	<p id="comment-topic-title">
 		<strong>{{pin.title}}</strong>
 	</p>
+	<label class="tag" id="comment-tag" ng-repeat="pin_tag in pin.pin_tags">#{{pin_tag.tag.label}}#</label>
 </div>
 <hr id="tags-divider">
 <div class="comment-topic-form">
