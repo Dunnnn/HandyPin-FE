@@ -167,18 +167,21 @@ app.controller('unauthHomeSideNavCtrl', function($scope, $state) {
 
 app.controller('loginCtrl', function($scope, $state, $rootScope, AuthService, alertHelper) {
 	$scope.submitLoginRequest = function() {
-		AuthService
-			.login($scope.username, $scope.password)
-			.then(function() {
-				$scope.username = ''
-				$scope.password = ''
-				$state.go('auth.home')
-			})
-			.catch(function() {
-				$scope.username = ''
-				$scope.password = ''
-				alertHelper.alertMsg('Invalid username password combination')
-			})
+		if($scope.loginForm.$valid)
+		{
+			AuthService
+				.login($scope.username, $scope.password)
+				.then(function() {
+					$scope.username = ''
+					$scope.password = ''
+					$state.go('auth.home')
+				})
+				.catch(function() {
+					$scope.username = ''
+					$scope.password = ''
+					alertHelper.alertMsg('Invalid username password combination')
+				})
+		}
 	}
 })
 
@@ -186,34 +189,37 @@ app.controller('newPinCtrl', function($scope, $rootScope, $state, APIHelper, geo
 	$scope.user = AuthService.getUser()
 
 	$scope.submitPostPinRequest = function () {
-		tag_string_array = null
+		if($scope.newPinForm.$valid)
+		{
+			tag_string_array = null
 
-		if($scope.tag_string) {
-			tag_string_array = $scope.tag_string.split(' ')
-		}
+			if($scope.tag_string) {
+				tag_string_array = $scope.tag_string.split(' ')
+			}
 
-		geolocationSvc.getCurrentPosition().then(function(currentPosition){
-			APIHelper.postPin({
-				title: $scope.title,
-				short_title: $scope.title.substring(0, 10),
-				description: $scope.description? $scope.description:null,
-				owner_id: $scope.user? $scope.user.id : -1,
-				longitude: currentPosition.coords.longitude,
-				latitude: currentPosition.coords.latitude,
-				tag_strings: tag_string_array? tag_string_array:null
-			}).then(function(pin){
-				uiGmapGoogleMapApi.then(function(maps){
-					pin.options.animation = maps.Animation.DROP
-					$rootScope.$broadcast('newPinCreated', pin)
-					$rootScope.isCollapsedHorizontal = true
+			geolocationSvc.getCurrentPosition().then(function(currentPosition){
+				APIHelper.postPin({
+					title: $scope.title,
+					short_title: $scope.title.substring(0, 10),
+					description: $scope.description? $scope.description:null,
+					owner_id: $scope.user? $scope.user.id : -1,
+					longitude: currentPosition.coords.longitude,
+					latitude: currentPosition.coords.latitude,
+					tag_strings: tag_string_array? tag_string_array:null
+				}).then(function(pin){
+					uiGmapGoogleMapApi.then(function(maps){
+						pin.options.animation = maps.Animation.DROP
+						$rootScope.$broadcast('newPinCreated', pin)
+						$rootScope.isCollapsedHorizontal = true
+					})
+				}).catch(function(error){
+					console.log("Error posting pin: " + error)
 				})
-			}).catch(function(error){
-				console.log("Error posting pin: " + error)
 			})
-		})
-		.catch(function(error){
-			console.log("Error getting current position" + error)
-		})
+			.catch(function(error){
+				console.log("Error getting current position" + error)
+			})
+		}
 
 	}
 })
@@ -225,16 +231,19 @@ app.controller('viewPinCtrl', function($rootScope, $scope, $state, pin, APIHelpe
 	$scope.pin = pin
 
 	$scope.submitCommentRequest = function() {
-		APIHelper.postComment({
-			owner_id: $scope.user? $scope.user.id : -1,
-			pin_id: $scope.pin.id,
-			content: $scope.new_comment
-		}).then(function(comment){
-			$scope.pin.comments.push(comment)
-		})
-		.catch(function(error){
-			console.log("Error commenting")
-		})
+		if($scope.commentForm.$valid)
+		{
+			APIHelper.postComment({
+				owner_id: $scope.user? $scope.user.id : -1,
+				pin_id: $scope.pin.id,
+				content: $scope.new_comment
+			}).then(function(comment){
+				$scope.pin.comments.push(comment)
+			})
+			.catch(function(error){
+				console.log("Error commenting")
+			})
+		}
 	}
 })
 

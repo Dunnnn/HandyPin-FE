@@ -1,25 +1,21 @@
 <p class="navbar-text">
 	<strong>New Post</strong>
 </p>
-<form class="nav-form">
-	<label>☰ Title</label>
-</form>
-<form class="nav-form">
-	<input id="make-title-id" type="text" placeholder="Title" ng-model="title" class="border-text-input">
-</form>
-<form class="nav-form">
-	<label>☰ Body</label>
-</form>
-<form class="nav-form">
-	<textarea id="make-body-id" rows="8" placeholder="(Optional)" ng-model="description"></textarea>
-</form>
-<form class="nav-form">
-	<label>☰ Tags</label>
-</form>
-<form class="nav-form">
-	<textarea id="make-tag-id" class="tag-input-field" ng-model="tag_string" placeholder="(Optional)" rows="2">
-	</textarea>
-</form>
-<form class="nav-form">
-	<button id="post-btn-id" type="button" ng-click="submitPostPinRequest()">Post</button>
+<form class="nav-form" name="newPinForm" role="form">
+	<div class="form-group">
+		<label>☰ Title</label>
+		<input id="make-title-id" type="text" placeholder="Title" ng-model="title" class="border-text-input form-control" required>
+	</div>
+	<div class="form-group">
+		<label>☰ Body</label>
+		<textarea id="make-body-id" rows="8" placeholder="(Optional)" ng-model="description" class="form-control"></textarea>
+	</div>
+	<div class="form-group">
+		<label>☰ Tags</label>
+		<textarea id="make-tag-id" class="tag-input-field form-control" ng-model="tag_string" placeholder="(Optional)" rows="2">
+		</textarea>
+	</div>
+	<div class="form-group">
+		<button id="post-btn-id" type="submit" ng-click="submitPostPinRequest()" style="width:100%">Post</button>
+    </div>
 </form>

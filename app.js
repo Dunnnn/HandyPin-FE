@@ -1,11 +1,19 @@
 'use strict';
 
 var app = angular.module('HandyPinApp', ['ui.bootstrap', 'ngAnimate',
-	'angularSpinner', 'ui.router', 'uiGmapgoogle-maps']);
+	'angularSpinner', 'ui.router', 'uiGmapgoogle-maps', 'bootstrap.angular.validation']);
 
 app.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
     usSpinnerConfigProvider.setDefaults({radius:6, length: 1});
 }]);
+
+app.config(['bsValidationConfigProvider', function(bsValidationConfigProvider) {
+  bsValidationConfigProvider.global.setValidateFieldsOn('submit');
+  // We can also customize to enable the multiple events to display form validation state
+  //bsValidationConfigProvider.global.setValidateFieldsOn(['submit', 'blur]);
+  
+  bsValidationConfigProvider.global.errorMessagePrefix = '<span class="glyphicon glyphicon-warning-sign"></span> &nbsp;';
+}])
 
 app.config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({

@@ -114,19 +114,20 @@
 /* -------------------------Input Text ----------------------------*/
 
 
-.sidenav input[type="text"] {
+.sidenav input[type="text"], .sidenav input[type="password"] {
   padding: 10px;
-  border: solid 5px rgba(255,255,255, 0.9);
   transition: border 0.3s;
 }
 .sidenav input[type="text"]:focus,
-.sidenav input[type="text"].focus {
+.sidenav input[type="text"].focus,
+.sidenav input[type="password"]:focus,
+.sidenav input[type="password"].focus
+ {
   border: solid 5px #969696;
 }
 
 .sidenav textarea{
   padding: 10px;
-  border: solid 5px rgba(255,255,255, 0.9);
   transition: border 0.3s;
 }
 .sidenav textarea:focus,
@@ -136,31 +137,28 @@
 
 .nav-form {
   margin: 20px;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .nav-form input{
+  height: inherit;
+  margin-top: 10px;
   padding: 10px;
-  margin: -10px;
   background-color: rgba(255,255,255, 0.9);
   font-size: 22px;
   font-family: "Courier New";
-  flex: 1;
 }
 
 .nav-form textarea{
+  margin-top: 10px;
   background-color: rgba(255,255,255, 0.9);
   font-size: 24px;
   padding: 10px;
-  margin: -10px;
   font-family: "Courier New";
-  flex: 1;
 }
 
 .nav-form label {
-  margin: 0px 0px 0px -10px;
   font-size: 25px;
   color: #fff;
   display: block;
@@ -286,7 +284,6 @@ hr{
 }
 
 .nav-form button {
-  margin: 20px -10px 0px -10px;
   font-size: 32px;
   height: 2em;
   -webkit-border-radius: 28;
@@ -455,4 +452,22 @@ hr{
 
 .navbar-text {
 	float: none;
+}
+
+/*for validation msg color*/
+.has-error .checkbox, .has-error .checkbox-inline, .has-error .control-label, .has-error .help-block, .has-error .radio, .has-error .radio-inline, .has-error.checkbox label, .has-error.checkbox-inline label, .has-error.radio label, .has-error.radio-inline label
+{
+	color:lightgoldenrodyellow;
+}
+
+.has-error .form-control,
+.has-error .form-control:focus
+{
+	border-width: initial;
+}
+
+.has-success .form-control,
+.has-success .form-control:focus
+{
+	border-width: initial;
 }
