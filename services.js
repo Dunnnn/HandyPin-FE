@@ -156,6 +156,8 @@ app.factory('APIHelper', function($q, $http, AuthService) {
     factory.postComment = postComment
 
     function searchPins(params) {
+        params.current_user_id = AuthService.getUser()?AuthService.getUser().id : null
+
         return $http({
             method: 'GET',
             url : 'https://ec2-54-208-245-21.compute-1.amazonaws.com/api/pins',

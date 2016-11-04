@@ -140,6 +140,7 @@ app.run(function($rootScope, $state) {
 	}
 })
 
+/* Temporarily commented out for further fix
 app.run(function ($rootScope, $state, AuthService) {
   //Important authenticaion process. Think through before making any change.
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
@@ -170,3 +171,4 @@ app.run(function ($rootScope, $state, AuthService) {
     }
   });
 });
+*/
