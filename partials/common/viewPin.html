@@ -5,48 +5,50 @@
 	<label class="tag" id="comment-tag" ng-repeat="pin_tag in pin.pin_tags">#{{pin_tag.tag.label}}#</label>
 </div>
 <hr id="tags-divider">
-<div class="row">
-	<div class="comment-topic-form col-md-3 text-center">
-		<div class="squareImgContainer">
-            <img style="width: 70%; height: 70%" ng-src="{{pin.owner.profile_photo.download_url||'res/User-red-icon.png'}}" class="pull-xs-left img-rounded img-thumbnail squareImg"  alt="loading image...">
-        </div>
-		<label id="comment-topic-user" ng-show="{{pin.owner.id}} > 0">{{pin.owner.username}}</label>
-		<label id="comment-topic-user" ng-show="{{pin.owner.id}} <= 0">Guest</label>
-	</div>
-	<div class="comment-topic-form col-md-9">
-		<div class="comment-time">
-			<label class="comment-time" id="post-time-comment-section">{{pin.created_at}}</label>
-		</div>
-		<label id="comment-topic-body" ng-show="pin.description">{{pin.description}}</label>
-		<label id="comment-topic-body" ng-show="!pin.description">{{pin.title}}</label>
-	</div>
-</div>
-<div id="comments-form">
-	<br>
-	<hr>
-	<br>
-	<div ng-repeat="comment in pin.comments" class="row">
-		<div class="comment-user-body col-md-3 text-center">
+<div class="nav-form">
+	<div class="row">
+		<div class="comment-topic-form col-md-3 text-center">
 			<div class="squareImgContainer">
-            	<img style="width: 70%; height: 70%" ng-src="{{comment.owner.profile_photo.download_url||'res/User-red-icon.png'}}" class="pull-xs-left img-rounded img-thumbnail squareImg"  alt="loading image...">
-        	</div>
-			<label class="comment-user" ng-show="{{comment.owner.id}} > 0">{{comment.owner.username}}</label>
-			<label class="comment-user" ng-show="{{comment.owner.id}} <= 0">Guest</label>
+	            <img style="width: 70%; height: 70%" ng-src="{{pin.owner.profile_photo.download_url||'res/User-red-icon.png'}}" class="pull-xs-left img-rounded img-thumbnail squareImg"  alt="loading image...">
+	        </div>
+			<label id="comment-topic-user" ng-show="{{pin.owner.id}} > 0">{{pin.owner.username}}</label>
+			<label id="comment-topic-user" ng-show="{{pin.owner.id}} <= 0">Guest</label>
 		</div>
-		<div class="comment-user-body col-md-9">
+		<div class="comment-topic-form col-md-9">
 			<div class="comment-time">
-				<label class="comment-time">{{comment.created_at}}</label>
+				<label class="comment-time" id="post-time-comment-section" style="font-size:initial">{{pin.created_at}}</label>
 			</div>
-			<label class="comment-body">{{comment.content}}</label>
+			<label id="comment-topic-body" ng-show="pin.description">{{pin.description}}</label>
+			<label id="comment-topic-body" ng-show="!pin.description">{{pin.title}}</label>
 		</div>
 	</div>
-	<form name="commentForm" role="form" class="nav-form">
-		<div class="form-group">
-			<textarea class="tag-input-fied form-control" rows="5" placeholder="(Share your comment with us!)" id="comment-input" ng-model="new_comment" required>
-			</textarea>
+	<div id="comments-form">
+		<br>
+		<hr>
+		<br>
+		<div ng-repeat="comment in pin.comments" class="row">
+			<div class="comment-user-body col-md-3 text-center">
+				<div class="squareImgContainer">
+	            	<img style="width: 70%; height: 70%" ng-src="{{comment.owner.profile_photo.download_url||'res/User-red-icon.png'}}" class="pull-xs-left img-rounded img-thumbnail squareImg"  alt="loading image...">
+	        	</div>
+				<label class="comment-user" ng-show="{{comment.owner.id}} > 0">{{comment.owner.username}}</label>
+				<label class="comment-user" ng-show="{{comment.owner.id}} <= 0">Guest</label>
+			</div>
+			<div class="comment-user-body col-md-9">
+				<div class="comment-time">
+					<label class="comment-time" style="font-size:initial">{{comment.created_at}}</label>
+				</div>
+				<label class="comment-body">{{comment.content}}</label>
+			</div>
 		</div>
-		<div class="form-group">
-			<button id="add-comment-btn" type="submit" ng-click="submitCommentRequest()" style="width:100%">Add Comment</button>
-		</div>
-	</form>
+		<form name="commentForm" role="form">
+			<div class="form-group">
+				<textarea class="tag-input-field form-control" rows="5" placeholder="(Share your comment with us!)" id="comment-input" ng-model="new_comment" required>
+				</textarea>
+			</div>
+			<div class="form-group">
+				<button id="add-comment-btn" type="submit" ng-click="submitCommentRequest()" style="width:100%">Add Comment</button>
+			</div>
+		</form>
+	</div>
 </div>
