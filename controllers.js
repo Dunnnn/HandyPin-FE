@@ -209,26 +209,18 @@ app.controller('registerCtrl', function($scope, $state, $rootScope, AuthService,
 	$scope.submitRegisterDataRequest = function() {
 		if($scope.registerForm.$valid)
 		{
-			if ($scope.confirmPassword != $scope.password){
+			AuthService
+			.register($scope.username, $scope.password, $scope.email)
+			.then(function() {
+				$state.go('auth.home')
+			})
+			.catch(function() {
+				$scope.email = ''
+				$scope.username = ''
 				$scope.password = ''
 				$scope.confirmPassword = ''
-
-				alertHelper.alertMsg('Passwords do not match');
-
-			}else{
-				AuthService
-				.register($scope.username, $scope.password, $scope.email)
-				.then(function() {
-					$state.go('auth.home')
-				})
-				.catch(function() {
-					$scope.email = ''
-					$scope.username = ''
-					$scope.password = ''
-					$scope.confirmPassword = ''
-					alertHelper.alertMsg('Invalid register state.')
-				})
-			}
+				alertHelper.alertMsg('Invalid register state.')
+			})
 		}
 	}
 })

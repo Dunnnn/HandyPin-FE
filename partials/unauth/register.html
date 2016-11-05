@@ -16,7 +16,7 @@
 	</div>
 	<div class="form-group">
 		<label for="pass-input-comfirm-id">☰ Confirm Password</label>
-		<input id="pass-input-confirm-id" type="password" placeholder="Confirm password" ng-model="confirmPassword" class="border-text-input form-control" required>
+		<input id="pass-input-confirm-id" type="password" placeholder="Confirm password" ng-model="confirmPassword" class="border-text-input form-control" required equalTo="password" match-name="password">
 	</div>
 	<div class="form-group">
 		<button id="confirm-btn-id" type="submit" ng-click="submitRegisterDataRequest()" style="width:100%">Confirm</button>
