@@ -7,19 +7,17 @@
 <hr id="tags-divider">
 <div class="nav-form">
 	<div class="row">
-		<div class="comment-topic-form col-md-3 text-center">
+		<div class="comment-topic-form col-xs-3 col-md-3 text-center">
 			<div class="squareImgContainer">
 	            <img style="width: 70%; height: 70%" ng-src="{{pin.owner.profile_photo.download_url||'res/User-red-icon.png'}}" class="pull-xs-left img-rounded img-thumbnail squareImg"  alt="loading image...">
 	        </div>
 			<label id="comment-topic-user" ng-show="{{pin.owner.id}} > 0">{{pin.owner.username}}</label>
 			<label id="comment-topic-user" ng-show="{{pin.owner.id}} <= 0">Guest</label>
 		</div>
-		<div class="comment-topic-form col-md-9">
-			<div class="comment-time">
-				<label class="comment-time" id="post-time-comment-section" style="font-size:initial">{{pin.created_at}}</label>
-			</div>
-			<label id="comment-topic-body" ng-show="pin.description">{{pin.description}}</label>
-			<label id="comment-topic-body" ng-show="!pin.description">{{pin.title}}</label>
+		<div class="comment-topic-form col-xs-9 col-md-9">
+			<div class="comment-time" id="post-time-comment-section" style="font-size:initial">{{pin.created_at}}</div>
+			<div id="comment-topic-body" ng-show="pin.description">{{pin.description}}</div>
+			<div id="comment-topic-body" ng-show="!pin.description">{{pin.title}}</div>
 		</div>
 	</div>
 	<div id="comments-form">
@@ -27,18 +25,16 @@
 		<hr>
 		<br>
 		<div ng-repeat="comment in pin.comments" class="row">
-			<div class="comment-user-body col-md-3 text-center">
+			<div class="comment-user-body col-xs-3 col-md-3 text-center">
 				<div class="squareImgContainer">
 	            	<img style="width: 70%; height: 70%" ng-src="{{comment.owner.profile_photo.download_url||'res/User-red-icon.png'}}" class="pull-xs-left img-rounded img-thumbnail squareImg"  alt="loading image...">
 	        	</div>
-				<label class="comment-user" ng-show="{{comment.owner.id}} > 0">{{comment.owner.username}}</label>
-				<label class="comment-user" ng-show="{{comment.owner.id}} <= 0">Guest</label>
+				<div class="comment-user" ng-show="{{comment.owner.id}} > 0">{{comment.owner.username}}</div>
+				<div class="comment-user" ng-show="{{comment.owner.id}} <= 0">Guest</div>
 			</div>
-			<div class="comment-user-body col-md-9">
-				<div class="comment-time">
-					<label class="comment-time" style="font-size:initial">{{comment.created_at}}</label>
-				</div>
-				<label class="comment-body">{{comment.content}}</label>
+			<div class="comment-user-body col-xs-9 col-md-9">
+				<div class="comment-time" style="font-size:initial">{{comment.created_at}}</div>
+				<div class="comment-body">{{comment.content}}</div>
 			</div>
 		</div>
 		<form name="commentForm" role="form">
