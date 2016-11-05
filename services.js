@@ -32,6 +32,7 @@ app.factory('AuthService',
     var user = null;
     var factory = {
       login: login,
+      register: register,
       logout: logout,
       loadCurrentUser: loadCurrentUser,
       getUser: getUser,
@@ -78,6 +79,45 @@ app.factory('AuthService',
         });
 
     
+
+      // return promise object
+        return deferred.promise;
+
+    }
+
+    function register(username, password, email) {
+
+        var deferred = $q.defer();
+
+        // send a post request to the server
+        $http({
+            withCredentials: true,
+            method: 'POST',
+            url : 'https://ec2-54-208-245-21.compute-1.amazonaws.com/api/users', 
+            params: {
+                username: username,
+                password: password,
+                email: email
+            }
+        })
+        // handle success
+        .success(function (data, status) {
+            if(status === 200){
+                user = data;
+                deferred.resolve();
+            } else {
+                user = null;
+                deferred.reject();
+            }
+
+        })
+        // handle error
+        .error(function (data) {
+          user = null;
+          deferred.reject();
+        });
+
+
 
       // return promise object
         return deferred.promise;

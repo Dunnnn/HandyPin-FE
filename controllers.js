@@ -198,7 +198,41 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, AuthService, al
 				})
 		}
 	}
+
+	$scope.submitRegisterRequest = function() {
+		console.log('registerCtrl');
+		$state.go('unauth.register');
+	}
 })
+
+app.controller('registerCtrl', function($scope, $state, $rootScope, AuthService, alertHelper) {
+	$scope.submitRegisterDataRequest = function() {
+		if($scope.registerForm.$valid)
+		{
+			if ($scope.confirmPassword != $scope.password){
+				$scope.password = ''
+				$scope.confirmPassword = ''
+
+				alertHelper.alertMsg('Passwords do not match');
+
+			}else{
+				AuthService
+				.register($scope.username, $scope.password, $scope.email)
+				.then(function() {
+					$state.go('auth.home')
+				})
+				.catch(function() {
+					$scope.email = ''
+					$scope.username = ''
+					$scope.password = ''
+					$scope.confirmPassword = ''
+					alertHelper.alertMsg('Invalid register state.')
+				})
+			}
+		}
+	}
+})
+
 
 app.controller('newPinCtrl', function($scope, $rootScope, $state, APIHelper, geolocationSvc, AuthService, uiGmapGoogleMapApi) {
 	$scope.user = AuthService.getUser()

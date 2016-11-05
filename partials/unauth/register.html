@@ -1,0 +1,24 @@
+<p class="navbar-text">
+	<strong>Register</strong>
+</p>
+<form class="nav-form" name="registerForm" role="form">
+	<div class="form-group">
+		<label for="username-input-id">☰ Username</label>
+		<input id="username-input-id" type="text" placeholder="username" ng-model="username" class="border-text-input form-control" required>
+	</div>
+	<div class="form-group">
+		<label for="pass-input-comfirm-id">☰ Email Address</label>
+		<input id="pass-input-confirm-id" type="email" placeholder="Email Address" ng-model="email" class="border-text-input form-control" required>
+	</div>
+	<div class="form-group">
+		<label for="pass-input-id">☰ Password</label>
+		<input id="pass-input-id" type="password" placeholder="password" ng-model="password" class="border-text-input form-control" required>
+	</div>
+	<div class="form-group">
+		<label for="pass-input-comfirm-id">☰ Confirm Password</label>
+		<input id="pass-input-confirm-id" type="password" placeholder="Confirm password" ng-model="confirmPassword" class="border-text-input form-control" required>
+	</div>
+	<div class="form-group">
+		<button id="confirm-btn-id" type="submit" ng-click="submitRegisterDataRequest()" style="width:100%">Confirm</button>
+	</div>
+</form>
