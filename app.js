@@ -135,6 +135,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    	}
 	    }
 	 })
+	 .state('auth.changeProfilePic', {
+	 	url: '/changeProfilePic',
+	 	views: {
+	        'sidenav@' : {
+	        	templateUrl: 'partials/auth/changeProfilePic.html',
+	         	controller: 'changeProfilePicCtrl'
+	      	}
+	    },
+	    unauth_redirect: 'unauth.home',
+	 })
 
 	 $urlRouterProvider.otherwise('unauth/home');
 })

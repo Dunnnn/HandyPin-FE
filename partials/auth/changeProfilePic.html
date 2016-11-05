@@ -1,0 +1,16 @@
+<div style="width: 200px; margin-left: 150px">
+	<div class="squareImgContainer" >
+	<img style="width:80%; height: 80%; padding: 4px" ng-src="{{displayed_photo}}" class="img-circle squareImg img-thumbnail"  alt="loading image..."></img>
+	</div>
+</div>
+<p class="navbar-text" style="text-align: center; font-size: 24px; margin-top: 0px; padding-top: 0px">
+	<strong>Update Profile Picture</strong>
+</p>
+<form class="nav-form">
+	<div class="form-group">
+		<input class="form-control" type="file" custom-on-change="doUpload" style="font-size: initial"/>
+	</div>
+	<div class="form-group">
+		<button id="confirm-btn-id" type="submit" ng-click="submitUpdateProfilePicRequest()" style="width:100%">Confirm</button>
+	</div>
+</form>

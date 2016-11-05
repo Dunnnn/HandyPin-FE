@@ -1,6 +1,6 @@
-<div style="width: 200px; margin-left: 150px">
+<div style="width: 200px; margin-left: 150px" uib-popover="Update your profile picture" popover-trigger="'mouseenter'" popover-placement="right">
 	<div class="squareImgContainer" >
-	<img style="width:80%; height: 80%; padding: 4px" ng-src="{{user.profile_photo.download_url || 'res/User-red-icon.png'}}" class="img-circle squareImg img-thumbnail"  alt="loading image..." id="homeProfilePic">
+	<img style="width:80%; height: 80%; padding: 4px" ng-src="{{user.profile_photo.download_url || 'res/User-red-icon.png'}}" class="img-circle squareImg img-thumbnail"  alt="loading image..." id="homeProfilePic" ui-sref="auth.changeProfilePic"></img>
 	</div>
 </div>
 <p class="navbar-text" style="text-align: center; border-bottom: none; margin: 0px; padding: 0px; line-height: initial">

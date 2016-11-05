@@ -329,3 +329,41 @@ app.controller('infoWindowCtrl', function($scope, $rootScope, $state, AuthServic
 		}
 	}
 })
+
+app.controller('changeProfilePicCtrl', function($scope, $state, AuthService, alertHelper) {
+	$scope.user = AuthService.getUser()
+	$scope.displayed_photo = (($scope.user)&&($scope.user.profile_photo))? 
+		$scope.user.profile_photo.download_url : 'res/User-red-icon.png'
+
+	$scope.doUpload = function() {
+		var reader = new FileReader();
+		reader.onload = imageIsLoaded;
+		if(event.target.files[0])
+		{
+	        reader.readAsDataURL(event.target.files[0]);
+	        $scope.file_to_upload = event.target.files[0]
+    	}
+    }
+
+    imageIsLoaded = function(e) {
+    	$scope.$apply(function() {
+        	$scope.displayed_photo = e.target.result;
+    	})
+    }
+
+    $scope.submitUpdateProfilePicRequest = function() {
+    	if($scope.file_to_upload) {
+    		AuthService
+    		.updateUserProfilePic($scope.file_to_upload)
+    		.then(function(file){
+    			alertHelper.alertMsg('You profile photo has been updated!')
+    			$state.go('auth.home')
+    		}).catch(function(error){
+    			alertHelper.alertMsg(error)
+    			console.log(error)
+    		})
+    	} else {
+    		alertHelper.alertMsg('A picture needs to be uploaded')
+    	}
+    }
+})

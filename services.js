@@ -36,6 +36,7 @@ app.factory('AuthService',
       loadCurrentUser: loadCurrentUser,
       getUser: getUser,
       updateUser: updateUser,
+      updateUserProfilePic: updateUserProfilePic
     }
 
     // return available functions for use in controllers
@@ -141,6 +142,22 @@ app.factory('AuthService',
             withCredentials: true
         }).then(function(data, status){
             user = data.data
+            return data.data
+        })
+    }
+
+    function updateUserProfilePic(file_to_upload){
+        fd = new FormData()
+        fd.append("profile_photo", file_to_upload)
+
+        return $http({
+            method: 'POST',
+            url : 'https://ec2-54-208-245-21.compute-1.amazonaws.com/api/users/' + user.id + '/profile_photo',
+            data: fd,
+            headers: {'Content-Type': undefined },
+            withCredentials: true
+        }).then(function(data, status){
+            user.profile_photo = data.data
             return data.data
         })
     }
