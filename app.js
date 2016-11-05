@@ -60,6 +60,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	    },
 	    auth_redirect: 'auth.home'
 	 })
+	 .state("unauth.register",{
+	 	url: '/register',
+	 	views: {
+	        'sidenav@' : {
+	        	templateUrl: 'partials/unauth/register.html',
+	         	controller: 'registerCtrl'
+	      	}
+	    },
+	    auth_redirect: 'auth.home'
+	 })
 	 .state('auth', {
 	 	abstract: true,
 	 	url: '/auth',
