@@ -115,7 +115,7 @@ app.factory('AuthService',
         // handle error
         .error(function (data) {
           user = null;
-          deferred.reject();
+          deferred.reject(data);
         });
 
 
@@ -321,12 +321,13 @@ app.factory('alertHelper', function($uibModal){
 
     factory.alertMsg = alertMsg
 
-    function alertMsg(msg) {
+    function alertMsg(msg, title) {
         var modalInstance = $uibModal.open({
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'partials/common/alertModal.html',
             controller: function($scope, $uibModalInstance){
+                $scope.title = title? title:'Alert'
                 $scope.msg = msg
                 $scope.ok = function () {
                     $uibModalInstance.close();

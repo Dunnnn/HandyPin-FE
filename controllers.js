@@ -173,7 +173,7 @@ app.controller('authHomeSideNavCtrl', function($scope, $rootScope, $state, AuthS
 		AuthService
 			.logout()
 			.then(function() {
-				alertHelper.alertMsg('You have successfully signed out')
+				alertHelper.alertMsg('You have successfully signed out', "Success")
 				$state.go('unauth.home')
 			})
 	}
@@ -200,7 +200,6 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, AuthService, al
 	}
 
 	$scope.submitRegisterRequest = function() {
-		console.log('registerCtrl');
 		$state.go('unauth.register');
 	}
 })
@@ -212,14 +211,15 @@ app.controller('registerCtrl', function($scope, $state, $rootScope, AuthService,
 			AuthService
 			.register($scope.username, $scope.password, $scope.email)
 			.then(function() {
+				alertHelper.alertMsg('Your account has been created!', "Success")
 				$state.go('auth.home')
 			})
-			.catch(function() {
+			.catch(function(error) {
 				$scope.email = ''
 				$scope.username = ''
 				$scope.password = ''
 				$scope.confirmPassword = ''
-				alertHelper.alertMsg('Invalid register state.')
+				alertHelper.alertMsg(error.message)
 			})
 		}
 	}
@@ -382,7 +382,7 @@ app.controller('changeProfilePicCtrl', function($scope, $state, AuthService, ale
     		AuthService
     		.updateUserProfilePic($scope.file_to_upload)
     		.then(function(file){
-    			alertHelper.alertMsg('You profile photo has been updated!')
+    			alertHelper.alertMsg('You profile photo has been updated!', "Success")
     			$state.go('auth.home')
     		}).catch(function(error){
     			alertHelper.alertMsg(error)

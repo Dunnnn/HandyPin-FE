@@ -163,12 +163,11 @@ app.run(function($rootScope, $state) {
 	$rootScope.isCollapsedHorizontal = true
 
 	$rootScope.closeMenu = function() {
-		if($state.current.url == '/home') {
+		if($state.current.url == '/home' || $state.current.url == '/viewPin?pin_id') {
 			$rootScope.isCollapsedHorizontal = true;
 		}
-		else {
-			$state.go('^.home')
-		}
+		
+		$state.go('^.home')
 	}
 })
 
