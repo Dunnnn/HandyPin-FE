@@ -163,8 +163,12 @@ app.run(function($rootScope, $state) {
 	$rootScope.isCollapsedHorizontal = true
 
 	$rootScope.closeMenu = function() {
-		$rootScope.isCollapsedHorizontal = true;
-		$state.go('^.home')
+		if($state.current.url == '/home') {
+			$rootScope.isCollapsedHorizontal = true;
+		}
+		else {
+			$state.go('^.home')
+		}
 	}
 })
 
