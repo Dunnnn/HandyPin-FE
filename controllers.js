@@ -1,15 +1,15 @@
 var app = angular.module('HandyPinApp');
 
 /*Map part*/
-app.controller('mainController', function($scope, currentPosition, APIHelper, $compile, $state, uiGmapGoogleMapApi) {
+app.controller('mainController', function($scope, currentPosition, APIHelper, $compile, $state, uiGmapGoogleMapApi, geolocationSvc) {
 	$scope.currentPosition = currentPosition;
 	$scope.pins = []
 
 	uiGmapGoogleMapApi.then(function(maps) {
 		$scope.selfMarker = {
 			position : {
-				latitude: currentPosition.coords.latitude,
-	    		longitude: currentPosition.coords.longitude
+				latitude: $scope.currentPosition.coords.latitude,
+	    		longitude: $scope.currentPosition.coords.longitude
 			},
 			options : {
 				icon : {
@@ -22,10 +22,10 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
 		}
 	})
 
-    $scope.map = { 
-    	center: { 
-    		latitude: currentPosition.coords.latitude,
-    		longitude: currentPosition.coords.longitude
+    $scope.map = {
+    	center: {
+    		latitude: $scope.currentPosition.coords.latitude,
+    		longitude: $scope.currentPosition.coords.longitude
     	},
     	zoom: 16,
     	options : {
@@ -76,7 +76,7 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
 			    		existing_pins = $scope.pins.map(function(existing_pin){return existing_pin.id})
 			    		if(existing_pins.indexOf(pin.id) == -1){
 			    			$scope.pins.push(pin)
-			    		} 
+			    		}
 			    	})
 			    }).catch(function(pins){
 			    	$scope.pins = []
@@ -97,7 +97,7 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
     	template : 'partials/common/recenterButton.html'
     }
 
-    $scope.$on('keywordChanged', function(event, args) { 
+    $scope.$on('keywordChanged', function(event, args) {
     	$scope.keyword = args
     	APIHelper
 	    .searchPins({
@@ -115,12 +115,15 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
     })
 
 	$scope.$on('newPinCreated', function(event, args) {
-		$scope.map.center = { 
-			latitude: currentPosition.coords.latitude,
-    		longitude: currentPosition.coords.longitude
-    	}
+        geolocationSvc.getCurrentPosition().then(function(currentPosition){
+            $scope.map.center = {
+                latitude: currentPosition.coords.latitude,
+                longitude: currentPosition.coords.longitude
+            }
+            $scope.currentPosition = currentPosition
+        })
 
-    	$scope.map.zoom = 16 
+    	$scope.map.zoom = 16
 		$scope.pins.push(args)
 		$state.go('^.home')
 	})
@@ -137,12 +140,15 @@ app.controller('mainController', function($scope, currentPosition, APIHelper, $c
 	})
 
 	$scope.$on('recenter', function(event, args) {
-		$scope.map.center = { 
-			latitude: currentPosition.coords.latitude,
-    		longitude: currentPosition.coords.longitude
-    	}
+        geolocationSvc.getCurrentPosition().then(function(currentPosition){
+            $scope.map.center = {
+                latitude: currentPosition.coords.latitude,
+                longitude: currentPosition.coords.longitude
+            }
+            $scope.currentPosition = currentPosition
+        })
 
-    	$scope.map.zoom = 16 
+        $scope.map.zoom = 16
 	})
 })
 
@@ -358,7 +364,7 @@ app.controller('infoWindowCtrl', function($scope, $rootScope, $state, AuthServic
 
 app.controller('changeProfilePicCtrl', function($scope, $state, AuthService, alertHelper) {
 	$scope.user = AuthService.getUser()
-	$scope.displayed_photo = (($scope.user)&&($scope.user.profile_photo))? 
+	$scope.displayed_photo = (($scope.user)&&($scope.user.profile_photo))?
 		$scope.user.profile_photo.download_url : 'res/User-red-icon.png'
 
 	$scope.doUpload = function() {
