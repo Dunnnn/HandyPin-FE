@@ -173,8 +173,8 @@
 
 }
 #comment-topic-title {
-border-style: :none;
-
+  border-style: :none;
+  margin-top: 40px;
 }
 #comment-section{
   white-space: normal;
