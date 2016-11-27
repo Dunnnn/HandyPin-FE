@@ -183,11 +183,8 @@ app.run(function($rootScope, $state) {
 app.filter('dateFormatter', function() {               // filter is a factory function
    return function(unformattedDate, emptyStrText) { // first arg is the input, rest are filter params
        // ... add date parsing and formatting code here ...
-       if(!(unformattedDate instanceof Date)){
-         var formattedDate = moment.tz(unformattedDate, 'Europe/London').format('YYYY-MM-DD h:mm:ss a')
-       } else {
-         var formattedDate = moment(unformattedDate).format('YYYY-MM-DD h:mm:ss a')
-       }
+       var formattedDate = moment(unformattedDate).format('YYYY-MM-DD h:mm:ss a')
+
        if(formattedDate === "" && emptyStrText) {
             formattedDate = emptyStrText;
        }
