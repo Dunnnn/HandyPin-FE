@@ -229,19 +229,23 @@ app.factory('APIHelper', function($q, $http, $timeout, AuthService) {
     }
 
     function getPin(params) {
-        return $http({
+        var deferred = $q.defer();
+
+        $http({
             method: 'GET',
             url : 'https://ec2-54-208-245-21.compute-1.amazonaws.com/api/pins/' + params.pin_id,
             params: params,
             withCredentials: true
         }).then(function(data, status){
             if(data.data.comments && data.data.comments.length > 1) {
-                data.data.comments.sort(function(comment_a, comment_b)
+                data.data.comments.sort(function(comment_a, comment_b){
                     return ( moment(comment_a) > moment(comment_b) )
-                )
+                })
             }
-            return data.data
+            deferred.resolve();
         })
+
+        return deferred.promise
     }
 
     function postPin(params) {
