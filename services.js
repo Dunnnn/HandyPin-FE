@@ -239,10 +239,18 @@ app.factory('APIHelper', function($q, $http, $timeout, AuthService) {
         }).then(function(data, status){
             if(data.data.comments && data.data.comments.length > 1) {
                 data.data.comments.sort(function(comment_a, comment_b){
-                    return ( moment(comment_a) > moment(comment_b) )
+                    if(moment(comment_a.created_at) > moment(comment_b.created_at) ) {
+		        return 1
+		    }
+
+                    if(moment(comment_a.created_at) < moment(comment_b.created_at) ) {
+		        return -1
+		    }
+
+		    return 0
                 })
             }
-            deferred.resolve();
+            deferred.resolve(data.data);
         })
 
         return deferred.promise
